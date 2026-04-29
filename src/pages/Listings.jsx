@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import ListingCard from '../components/ListingCard';
+
 
 function Listings({ listings }) {
   const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+
+  const filtered = listings.filter(l => {
+    const q = search.toLowerCase();
+    return (
+      l.year?.toLowerCase().includes(q) ||
+      l.make?.toLowerCase().includes(q) ||
+      l.model?.toLowerCase().includes(q) ||
+      l.trim?.toLowerCase().includes(q) ||
+      l.parts?.some(p => p.name.toLowerCase().includes(q))
+    );
+  });
 
   if (listings.length === 0) {
     return (
@@ -15,50 +30,28 @@ function Listings({ listings }) {
   }
 
   return (
-    <Container className="mt-4" >
+    <Container className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Listings</h2>
+        <Form.Control
+          style={{ maxWidth: 300 }}
+          placeholder="Search for car parts or title"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          aria-label="Search listings"
+        />
       </div>
 
-      <Row xs={1} sm={2} md={3} lg={4} className="g-3">
-        {listings.map(listing => (
-          <Col key={listing.id}>
-            <Card
-              className="h-100 shadow-sm"
-              style={{ cursor: 'pointer', transition: 'transform 0.15s' }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-              onClick={() => navigate(`/listings/${listing.id}`)}
-            >
-              {listing.images.length > 0 ? (
-                <Card.Img
-                  variant="top"
-                  src={listing.images[0].url}
-                  style={{ height: 160, objectFit: 'cover' }}
-                />
-              ) : (
-                <div
-                  className="bg-secondary d-flex align-items-center justify-content-center"
-                  style={{ height: 160 }}
-                >
-                  <span className="text-white">No Image</span>
-                </div>
-              )}
-              <Card.Body>
-                <Card.Title className="mb-1">
-                  {listing.year} {listing.make} {listing.model}
-                </Card.Title>
-                {listing.trim && (
-                  <Card.Subtitle className="text-muted mb-2">{listing.trim}</Card.Subtitle>
-                )}
-                <Card.Text className="small text-muted">
-                  {listing.parts.length} part(s) removed
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {filtered.length === 0 ? (
+        <p className="text-muted">No listings match your search.</p>
+      ) : (
+        <Row xs={1} sm={2} md={3} lg={4} className="g-3">
+          {filtered.map(listing => (
+            <ListingCard key={listing.id} listing={listing} />
+
+          ))}
+        </Row>
+      )}
     </Container>
   );
 }

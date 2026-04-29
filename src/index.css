@@ -19,6 +19,10 @@ body {
   font-size: 1.25rem !important;
 }
 
+.form-control {
+  background-color: #ffffff !important;
+}
+
 .nav-link.active {
   font-weight: 600 !important;
   color: #dc3545 !important;
@@ -28,6 +32,10 @@ body {
   border: none !important;
   border-radius: 10px !important;
   background-color: #ffffff !important;
+}
+
+.text-muted {
+  color: #5a6370 !important;
 }
 
 .card-img-top {
