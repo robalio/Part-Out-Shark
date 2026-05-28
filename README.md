@@ -1,16 +1,21 @@
-# React + Vite
+# Part Out Shark
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+What if there was a place to post car part-out listings where rather than tracking every individual part a car **does** have (as all sites like this currently do), we just track parts that it **does not** have? Simple concept, much easier to use from the seller's perspective, and less work for both buyers and sellers.
 
-Currently, two official plugins are available:
+Part Out Shark functions as a used-car website, but only featuring cars that are broken and being sold for parts. Users can create accounts, post cars for part-out, and save listings with options to contact sellers. When posting, sellers provide the year, make, model, trim, photos, and a description. And as parts are sold off the car they can be easily added to the post, keeping the listing accurate with minimal effort. Most importantly, this kind of site could save millions of people searching for car parts from the hellscape of Facebook Marketplace.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The site features:
+* User registration and login
+* Listing creation and editing
+* Adding and removing parts
+* Saving listings
+* Search bar
 
-## React Compiler
+The page can be ran via Github pages @[https://robalio.github.io/Part-Out-Shark](https://robalio.github.io/Part-Out-Shark), or by running:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+npm install
+npm run dev
+```
+Please Note! This app uses localStorage for listings, therefore the site will appear empty on a first visit. You'll need to create an account and post a listing to try it out!
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
